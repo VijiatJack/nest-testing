@@ -6,32 +6,32 @@ import { CatsService } from '../../src/cats/cats.service';
 import { CoreModule } from '../../src/core/core.module';
 
 describe('Cats', () => {
-  const catsService = { findAll: () => ['test'] };
+    const catsService = { findAll: () => ['test'] };
 
-  let app: INestApplication;
+    let app: INestApplication;
 
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [CatsModule, CoreModule],
-    })
-      .overrideProvider(CatsService)
-      .useValue(catsService)
-      .compile();
+    beforeAll(async () => {
+        const moduleRef = await Test.createTestingModule({
+            imports: [CatsModule, CoreModule],
+        })
+            .overrideProvider(CatsService)
+            .useValue(catsService)
+            .compile();
 
-    app = moduleRef.createNestApplication();
-    await app.init();
-  });
+        app = moduleRef.createNestApplication();
+        await app.init();
+    });
 
-  it(`/GET cats`, () => {
-    return request(app.getHttpServer())
-      .get('/cats')
-      .expect(200)
-      .expect({
-        data: catsService.findAll(),
-      });
-  });
+    it(`/GET cats`, () => {
+        return request(app.getHttpServer())
+            .get('/cats')
+            .expect(200)
+            .expect({
+                data: catsService.findAll(),
+            });
+    });
 
-  afterAll(async () => {
-    await app.close();
-  });
+    afterAll(async () => {
+        await app.close();
+    });
 });

@@ -5,6 +5,6 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [CoreModule, CatsModule, AuthModule, UsersModule],
+    imports: [CoreModule, CatsModule, AuthModule, UsersModule],
 })
-export class AppModule {}
+export class AppModule { }

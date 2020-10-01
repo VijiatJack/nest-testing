@@ -12,28 +12,28 @@ import { Cat } from './entities/cat.entity';
 @UseGuards(RolesGuard)
 @Controller('cats')
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
+    constructor(private readonly catsService: CatsService) { }
 
-  @Post()
-  @ApiOperation({ summary: 'Create cat' })
-  @ApiResponse({ status: 403, description: 'Forbidden' })
-  @Roles('admin')
-  async create(@Body() createCatDto: CreateCatDto): Promise<Cat> {
-    return this.catsService.create(createCatDto);
-  }
+    @Post()
+    @ApiOperation({ summary: 'Create cat' })
+    @ApiResponse({ status: 403, description: 'Forbidden' })
+    @Roles('admin')
+    async create(@Body() createCatDto: CreateCatDto): Promise<Cat> {
+        return this.catsService.create(createCatDto);
+    }
 
-  @Get()
-  @ApiResponse({ status: 200, description: 'Found records' })
-  async findAll(): Promise<Cat[]> {
-    return this.catsService.findAll();
-  }
+    @Get()
+    @ApiResponse({ status: 200, description: 'Found records' })
+    async findAll(): Promise<Cat[]> {
+        return this.catsService.findAll();
+    }
 
-  @Get(':id')
-  @ApiResponse({ status: 200, description: 'The found record', type: Cat })
-  async findOne(
-    @Param('id', new ParseIntPipe())
-    id: number,
-  ): Promise<Cat> {
-    return this.catsService.findOne(+id);
-  }
+    @Get(':id')
+    @ApiResponse({ status: 200, description: 'The found record', type: Cat })
+    async findOne(
+        @Param('id', new ParseIntPipe())
+        id: number,
+    ): Promise<Cat> {
+        return this.catsService.findOne(+id);
+    }
 }
